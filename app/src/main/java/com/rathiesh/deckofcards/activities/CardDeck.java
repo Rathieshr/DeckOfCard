@@ -114,6 +114,7 @@ import java.util.Vector;
             if(!isSuit){
                 boolean isSuitlocal = true;
                 isSuit = isSuitlocal;
+                toolbar.setSubtitle("Suit"); 
                 recyclerView.removeAllViewsInLayout();    // Since same recycler view is reused . the view are cleared first.
                 cardDeckViewModel.createSuitRankModel();  // Interface call to create the card model
                 setSuitAdapters();                        // on all set Suit adapter is called and is set to recycler view.
