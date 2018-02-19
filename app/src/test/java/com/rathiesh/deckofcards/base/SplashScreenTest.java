@@ -3,7 +3,7 @@ package com.rathiesh.deckofcards.base;
 import android.content.Intent;
 
 import com.rathiesh.deckofcards.R;
-import com.rathiesh.deckofcards.activities.Deck;
+import com.rathiesh.deckofcards.activities.CardDeck;
 
 import org.junit.After;
 import org.junit.Before;
@@ -47,22 +47,13 @@ public class SplashScreenTest {
     }
     @Test
     public void splashScreenDelay() throws InterruptedException{
-//        SplashScreen  splashScreen = new SplashScreen();
-//        Intent intent = Shadows.shadowOf(splashScreenActivity).peekNextStartedActivity();
-//        assertNotEquals(Deck.class.getCanonicalName(), intent.getComponent().getClassName());
-//        assertFalse(splashScreenActivity.isFinishing());
-//        splashScreenActivity.delaySplash();
-//        ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
-//        assertEquals(Deck.class.getCanonicalName(), intent.getComponent().getClassName());
-//        assertTrue(splashScreenActivity.isFinishing());
         assertFalse(splashScreenActivity.isFinishing());
         ShadowLooper.runUiThreadTasksIncludingDelayedTasks();
-
         ShadowApplication instance = ShadowApplication.getInstance();
         Intent nextStartedActivity = instance.getNextStartedActivity();
         assertNotNull(nextStartedActivity);
         String className = nextStartedActivity.getComponent().getClassName();
-        assertThat(className, is(Deck.class.getName()));
+        assertThat(className, is(CardDeck.class.getName()));
         assertTrue(splashScreenActivity.isFinishing());
 
     }
