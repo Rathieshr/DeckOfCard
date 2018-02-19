@@ -1,7 +1,7 @@
 # DeckOfCard
 Android project of deck of cards
 
-| Build Tools version | 26.0.2  |
+| Build Tools version | 26.1.0  |
 | ------ | ------ |
 | Minimum SDK | 21 |
 | Target SDK | 26 |
