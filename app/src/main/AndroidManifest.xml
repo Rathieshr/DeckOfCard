@@ -2,6 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rathiesh.deckofcards">
 
+    <!-- BLE Peripheral Permissions -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    
+    <!-- BLE Hardware Features -->
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/cards"
@@ -17,6 +31,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.CardDeck" />
+        <activity android:name=".activities.BlePeripheralActivity" 
+            android:label="BLE Peripheral"
+            android:parentActivityName=".activities.CardDeck" />
+        
+        <!-- BLE Peripheral Service -->
+        <service android:name=".ble.BlePeripheralService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>
