@@ -1,11 +1,13 @@
 package com.rathiesh.deckofcards.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.rathiesh.deckofcards.R;
@@ -21,7 +23,7 @@ import java.util.Vector;
  * Created by rathiesh on 16/02/18.
  * This activity is the main activity which holds the layout of recycler view and corresponding adapter initializations
  */
- public class CardDeck extends BaseActivity implements CardDeckViewResponseInterface {
+public class CardDeck extends BaseActivity implements CardDeckViewResponseInterface {
 
     private Context mContext;
     private CardDeckViewModel cardDeckViewModel;  // Model which holds all the details
@@ -99,6 +101,15 @@ import java.util.Vector;
     }
 
     /**
+     * Create options menu
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    /**
      * check which list is currently shown and action is performed
      * on clicking back
      * if rank list previous suit list is shown.
@@ -114,7 +125,7 @@ import java.util.Vector;
             if(!isSuit){
                 boolean isSuitlocal = true;
                 isSuit = isSuitlocal;
-                toolbar.setSubtitle("Suit"); 
+                toolbar.setSubtitle("Suit");
                 recyclerView.removeAllViewsInLayout();    // Since same recycler view is reused . the view are cleared first.
                 cardDeckViewModel.createSuitRankModel();  // Interface call to create the card model
                 setSuitAdapters();                        // on all set Suit adapter is called and is set to recycler view.
@@ -122,6 +133,12 @@ import java.util.Vector;
             else{
                 finish(); // close this activity and return to preview activity (if there is any)
             }
+        }
+        // Handle BLE Peripheral menu item
+        else if (item.getItemId() == R.id.action_ble_peripheral) {
+            Intent bleIntent = new Intent(mContext, BlePeripheralActivity.class);
+            startActivity(bleIntent);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
